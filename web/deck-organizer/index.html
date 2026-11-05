@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; frame-src 'self' blob:; worker-src 'self' blob:; connect-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'"><title>Deck Organizer</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div><h1>Deck Organizer</h1><p>Notes, documents and expiry dates — stored on this device.</p></div><div class="actions"><button id="offline">Prepare offline OCR</button></div></header>
+<p id="offlineStatus" class="hint" role="status">Offline OCR has not been prepared yet.</p>
+<div id="compressStatus" class="error" role="status"></div><input id="compressFile" type="file" accept="application/pdf,.pdf" hidden><nav aria-label="Sections"><button data-tab="notes" class="active">Notes</button><button data-tab="docs">Documents</button><button data-tab="reminders">Reminders <span id="badge"></span></button><button id="compressPdf" type="button">Compress PDF</button></nav>
+<div class="toolbar"><input id="search" type="search" placeholder="Search notes or documents" aria-label="Search"><button id="add" class="primary">New note</button></div>
+<p id="reminderHint" class="hint" hidden>Reminders appear here while the app is open or on your next visit. This version does not send alerts when the browser is closed.</p>
+<main id="list" aria-live="polite"><p>Loading local records…</p></main>
+<div id="toast" role="status" hidden></div>
+<dialog id="editor"><form id="editForm"><div class="dialogHead"><h2 id="editHeading">New note</h2><button type="button" data-close="editor">Close</button></div>
+<label>Title<input id="title" required maxlength="200"></label>
+<div id="docFields" hidden><div class="grid"><label>Document / Certificate Number<input id="docNumber" maxlength="120"></label><label>Issue Date<input id="issue" type="date"></label><label>Expiry Date<input id="expiry" type="date"></label><label>Remind me before expiry<select id="lead"><option value="30">30 days</option><option value="14">14 days</option><option value="7">7 days</option><option value="1">1 day</option><option value="0">On expiry date</option></select></label></div><p class="hint">Check the expiry date against the original document before saving.</p></div>
+<label id="bodyLabel">Note / Comments<textarea id="body" rows="7" maxlength="100000"></textarea></label>
+<label id="pinLabel" class="check"><input id="pin" type="checkbox">Pin this note</label>
+<div class="actions"><button type="button" id="attach">Attach file</button><button type="button" id="scan">Scan file to text</button><button type="button" id="camera">Open camera</button></div>
+<p class="hint">JPEG, PNG, WebP or PDF. Up to 20 MB per file; up to 5 attachments. Scanned PDF recognition is limited to 20 pages per operation.</p><div id="attachments"></div>
+<p id="editError" class="error" role="alert"></p><div class="actions bottom"><button type="submit" class="primary" id="save">Save</button><button type="button" id="delete" class="danger">Delete</button></div>
+</form></dialog>
+<dialog id="review"><div class="dialogHead"><h2>Review recognized text</h2><button data-close="review">Cancel</button></div><p id="ocrInfo" class="hint"></p>
+<label>Recognized text — edit before inserting<textarea id="recognized" rows="12" maxlength="100000"></textarea></label>
+<div id="dateReview" hidden><label>Suggested title<input id="suggestTitle" maxlength="200"></label><label>Suggested document number<input id="suggestNumber" maxlength="120"></label><p>Possible dates — select the expiry date, or leave it blank and enter it manually.</p><div id="dateCandidates"></div><label>Confirmed expiry date<input id="reviewExpiry" type="date"></label></div>
+<label class="check"><input type="checkbox" id="keepPhoto" checked>Keep the source file with this record</label>
+<label class="check"><input type="checkbox" id="reviewConfirm">I checked the recognized text and any selected expiry date.</label>
+<p id="reviewError" class="error"></p><button id="insert" class="primary">Insert into record</button></dialog>
+<dialog id="cameraDialog"><div class="dialogHead"><h2>Photograph text</h2><button data-close="cameraDialog">Close</button></div><p>Keep the document flat, well lit and in focus.</p><video id="video" autoplay playsinline muted></video><p id="cameraError" class="error"></p><button id="capture" class="primary">Take photo and recognize</button></dialog>
+<dialog id="busy"><h2>Recognizing on this device</h2><p id="progress" role="status">Starting…</p><progress id="progressBar" max="1"></progress><button id="cancelOcr">Cancel</button></dialog>
+<dialog id="preview"><div class="dialogHead"><h2 id="previewName">Attachment</h2><button data-close="preview">Close</button></div><div id="previewContent"></div><button id="downloadAttachment">Download original</button></dialog>
+<input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" hidden>
+<script type="module" src="app.js"></script></body></html>

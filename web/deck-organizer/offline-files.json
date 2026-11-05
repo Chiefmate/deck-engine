@@ -1,0 +1,22 @@
+[
+  "index.html",
+  "style.css",
+  "app.js",
+  "compress-pdf.js",
+  "model.js",
+  "offline-files.json",
+  "vendor/worker.min.js",
+  "vendor/eng.traineddata.gz",
+  "vendor/tesseract-core-simd-lstm.wasm.js",
+  "vendor/pdf.worker.mjs",
+  "vendor/LICENSE-tesseract.txt",
+  "vendor/LICENSE-core.txt",
+  "vendor/rus.traineddata.gz",
+  "vendor/tesseract-core-lstm.wasm",
+  "vendor/tesseract-core-lstm.wasm.js",
+  "vendor/LICENSE-tessdata.txt",
+  "vendor/pdf.mjs",
+  "vendor/tesseract.min.js",
+  "vendor/tesseract-core-simd-lstm.wasm",
+  "vendor/LICENSE-pdfjs.txt"
+]
